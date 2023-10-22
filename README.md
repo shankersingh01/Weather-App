@@ -35,8 +35,12 @@ API Usage
 This app uses the OpenWeatherMap API to fetch weather data. To use the app, you'll need to sign up for a free API key from OpenWeatherMap and replace the placeholder in the JavaScript code with your own API key.
 
 ```javascript
-const apiKey = 'YOUR_API_KEY_HERE';
+"apiKey" : "YOUR_API_KEY_HERE";
 ```
+Screenshot of JS file
+
+![Screenshot 2023-10-22 at 11 50 12 PM](https://github.com/shankersingh01/Weather-App/assets/143743282/744c09dc-c284-4e21-9c09-4eca0bb33c36)
+
 
 Screenshots
 ---
