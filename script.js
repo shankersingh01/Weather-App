@@ -1,6 +1,8 @@
 let weather = {
   apiKey: weatherConfig.apiKey, // OpenWeather API key
   unsplashAccessKey: unsplashConfig.accessKey, // Unsplash API key
+  defaultLocation: "Bangalore", // Default location if geolocation fails
+  defaultBackgroundImage: "blurryimageRain.webp", // Path to the default background image
 
   // Fetch weather data by city name
   fetchWeather: function (city) {
@@ -53,7 +55,12 @@ let weather = {
         const imageUrl = data.urls.regular;
         document.body.style.backgroundImage = "url('" + imageUrl + "')";
       })
-      .catch((error) => console.error("Error fetching Unsplash image:", error));
+      .catch((error) => {
+        console.error("Error fetching Unsplash image:", error);
+        // Set default background image if Unsplash fetch fails
+        document.body.style.backgroundImage =
+          "url('" + this.defaultBackgroundImage + "')";
+      });
   },
 
   // Search for weather by city name
@@ -61,7 +68,7 @@ let weather = {
     this.fetchWeather(document.querySelector(".searchbar").value);
   },
 
-  // Fetch default weather based on user's geolocation
+  // Fetch default weather based on user's geolocation or use default location
   getDefaultWeather: function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -71,11 +78,15 @@ let weather = {
           this.fetchWeatherByCoords(lat, lon);
         },
         () => {
-          alert("Geolocation is not allowed.");
+          // If geolocation fails, fetch weather for the default location
+          this.fetchWeather(this.defaultLocation);
+          alert("Geolocation is not allowed. Defaulting to Bangalore.");
         }
       );
     } else {
-      alert("Geolocation is not supported by this browser.");
+      // If geolocation is not supported, fetch weather for the default location
+      this.fetchWeather(this.defaultLocation);
+      alert("Geolocation is not supported. Defaulting to Bangalore.");
     }
   },
 
@@ -97,12 +108,14 @@ document.querySelector(".search button").addEventListener("click", function () {
 document
   .querySelector(".searchbar")
   .addEventListener("keyup", function (event) {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       weather.search();
     }
   });
 
-// Fetch default weather on page load using geolocation
+// Fetch default weather on page load using geolocation or fallback to Bangalore
 window.onload = function () {
+  document.body.style.backgroundImage =
+    "url('" + weather.defaultBackgroundImage + "')"; // Set default background on load
   weather.getDefaultWeather();
 };
