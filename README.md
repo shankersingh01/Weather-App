@@ -35,8 +35,8 @@ const apiKey = 'YOUR_API_KEY_HERE';
 
 Screenshots
 ---
-Screenshot 1
-Screenshot 2
+![Screenshot 2024-10-25 at 12 03 29 AM](https://github.com/user-attachments/assets/419ed12b-f988-42ea-ad74-5e075004458a)
+
 
 Future Enhancements
 ---
