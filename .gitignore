@@ -1,3 +1,6 @@
 config.js
 .DS_Store
+<<<<<<< HEAD
 .env
+=======
+>>>>>>> 69d5ea6 (Add .DS_Store to .gitignore)
